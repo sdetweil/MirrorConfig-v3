@@ -1,0 +1,8 @@
+{
+  "name": "Ionic2Slides",
+  "app_id": "c173c942",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
