@@ -1,14 +1,208 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content (ionFocus)="focusChanged('focus')" ng-focus="focusChanged('focus')" (ionBlur)="focusChanged('blur')"> 
+<ion-slides loop="true" id="loopSlider">
+  <ion-slide class="theroot" width="100%"  >	
+  <ion-header>			
+ <ion-toolbar>
+  <ion-row>
+    <ion-col col-1>
+			<button ion-button icon-only (click)="addeditClicked(1,getselectedRow('viewer'),'viewer',{true:'add',false:'edit'}[getselectedRow('viewer')<0])">
+				<ion-icon [ios]="getselectedRow('viewer')<0 ? 'ios-add':'ios-search'" [md]="getselectedRow('viewer')<0 ? 'md-add':'md-search'"></ion-icon> 
+			</button>					
+		</ion-col>
+		<ion-col col-10>Viewers</ion-col> 
+	  <ion-col col-1>
+			<button ion-button  icon-only (click)="menu()">
+				<ion-icon [ios]="ios-menu" [md]="md-menu"></ion-icon> 
+			</button>				
+		</ion-col>		
+	 </ion-row> 
+</ion-toolbar>
+ <ion-toolbar>  
+	<ion-row>	
+		<ion-col col-4 class=" center">Name</ion-col>
+		<ion-col col-3 class=" center">Tags</ion-col>
+		<ion-col col-2 class=" center">Advance</ion-col>
+		<ion-col col-1 class=" center">Rate</ion-col>
+		<ion-col col-2 class=" center">Active</ion-col>
+	</ion-row>			
+ </ion-toolbar> 
+  </ion-header>
+<ion-content >   
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content 
+      refreshingSpinner="circles"
+      refreshingText="refreshing data, please wait">
+    </ion-refresher-content>
+ </ion-refresher> 
+	<ion-row  *ngFor="let viewer of data.Viewers;let i=index" 
+			[ngClass]="{true:'selected',false:''}[i ==  getselectedRow('viewer')]"                        
+			(dblTap)="addeditClicked(2,i,'viewer','edit')" nowrap
+			(press)="deleterow(i,'viewer')"			 
+			 >
+		<ion-col  col-4 class = "colb  center" (click)="setClickedRow(i,'viewer','Name')">{{viewer.Name}}</ion-col>
+		<ion-col  col-3 class="colb   center" (click)="setClickedRow(i,'viewer','Tags')">
+		   <ion-list >
+		     <ion-item no-lines class="center tag-background-transparent" [ngClass]="{true:'tag-text-white',false:''}[i ==  getselectedRow('viewer')]" *ngFor="let tag of viewer.Tags">{{tagfromID(tag)}}</ion-item>
+		   </ion-list>
+ 		</ion-col>
+		<ion-col col-2 class = " colb  center " (click)="setClickedRow(i,'viewer','Advance')">{{viewer.Advance}} </ion-col>
+		<ion-col col-1 class = " colb  center" (click)="setClickedRow(i,'viewer','RefreshRate')">{{viewer.ImageRefreshRate}}</ion-col>
+		<ion-col col-2 class = "col colb  center" (click)="setClickedRow(i,'viewer','Active')">{{viewer.Active}}</ion-col>
+	</ion-row>
 </ion-content>
+  </ion-slide>
+<!--  for datasources -->
+	<ion-slide class="theroot " width="100%" >
+	<ion-header>	
+  <ion-toolbar  >
+  <ion-row>
+    <ion-col col-1>
+			<button ion-button  icon-only (click)="addeditClicked(1,getselectedRow('datasource'),'datasource',{true:'add',false:'edit'}[getselectedRow('datasource')<0])">
+				<ion-icon [ios]="getselectedRow('datasource')<0 ? 'ios-add':'ios-search'" [md]="getselectedRow('datasource')<0 ? 'md-add':'md-search'"></ion-icon> 
+			</button>				
+		</ion-col>
+		<ion-col col-10>Datasources</ion-col> 
+	  <ion-col col-1>
+			<button ion-button  icon-only (click)="menu()">
+				<ion-icon [ios]="ios-menu" [md]="md-menu"></ion-icon> 
+			</button>				
+		</ion-col>		
+	 </ion-row> 
+  </ion-toolbar>
+ <ion-toolbar > 
+	<ion-row>	
+		<ion-col col-3 class=" center">Name</ion-col>
+		<ion-col col-2 class=" center">Type</ion-col>
+		<ion-col col-2 class=" center">Active</ion-col>
+		<ion-col col-5 class=" center">Root</ion-col>
+	</ion-row>						
+</ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content 
+      refreshingSpinner="circles"
+      refreshingText="refreshing data, please wait">
+    </ion-refresher-content>
+ </ion-refresher> 
+	<ion-row *ngFor="let datasource of data.DataSources;let ds =index;"									
+										  (press)="deleterow(ds,'datasource')"
+										  [ngClass]="{true:'selected',false:''}[ds == getselectedRow('datasource')]"
+										  (dblTap)="addeditClicked(2,ds,'datasource','edit')">
+		 <ion-col col-3 class = "colb " (click)="setClickedRow(ds,'datasource','Name')">{{datasource.Name}}</ion-col>
+		 <ion-col col-2 class = "colb center" (click)="setClickedRow(ds,'datasource','Type')">{{datasource.Type.Type}}</ion-col>
+		 <ion-col col-2 class = "colb center" (click)="setClickedRow(ds,'datasource','Active')">{{datasource.Active}}</ion-col> 
+		 <ion-col col-5 align="left" class="colb path" (click)="setClickedRow(ds,'datasource','Root')">{{datasource.Root}}</ion-col>
+	</ion-row>
+		</ion-content>
+  </ion-slide>
+<!--- for images --->
+  <ion-slide class="theroot" width="100%" >
+  <ion-header>
+  <ion-toolbar >
+  <ion-row>
+    <ion-col col-1>
+			<button ion-button  icon-only (click)="addeditClicked(1,getselectedRow('image'),'image',{true:'add',false:'edit'}[getselectedRow('image')<0])">
+				<ion-icon [ios]="getselectedRow('image')<0 ? 'ios-add':'ios-search'" [md]="getselectedRow('image')<0 ? 'md-add':'md-search'"></ion-icon> 
+			</button>				
+		</ion-col>
+		<ion-col col-10>Images</ion-col>
+    <ion-col col-1>
+			<button ion-button  icon-only (click)="menu()">
+				<ion-icon [ios]="ios-menu" [md]="md-menu"></ion-icon> 
+			</button>				
+		</ion-col> 
+	 </ion-row> 
+  </ion-toolbar>
+ <ion-toolbar > 
+	<ion-row>	
+		<ion-col col-3 class=" center">Name</ion-col>
+		<ion-col col-3 class=" center">Tags</ion-col>
+		<ion-col col-3 class=" center">Source</ion-col>
+		<ion-col col-3 class=" center">Path</ion-col>
+	</ion-row>						
+</ion-toolbar>
+</ion-header>
+ <ion-content>
+   <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content 
+      refreshingSpinner="circles"
+      refreshingText="refreshing data, please wait">
+    </ion-refresher-content>
+ </ion-refresher> 
+		<ion-row  *ngFor="let image of data.Images;let ii=index;"
+												 (press)="deleterow(ii,'image')"
+												 [ngClass]="{true:'selected',false:''}[ii == getselectedRow('image')]"
+												 (dblTap)="addeditClicked(2, ii,'image','edit')"> 																										
+		  <ion-col  item-content col-3 class = "colb center " (click)="setClickedRow(ii,'image','Name')">{{image.Name}}</ion-col>	
+			<ion-col item-content col-3 class="colb center" (click)="setClickedRow(ii,'image','Tags')">
+			<ion-list >
+		     <ion-item no-lines class="center tag-background-transparent" [ngClass]="{true:'tag-text-white',false:''}[ii ==  getselectedRow('image')]" *ngFor="let tag of image.Tags">{{tagfromID(tag)}}</ion-item>
+		   </ion-list>
+			</ion-col>		
+		 <ion-col item-content col-3 class = "colb center " (click)="setClickedRow(ii,'image','DataSource')"><ion-col>{{datasourcefromID(image.DataSource)}}</ion-col></ion-col>
+		 <ion-col item-content col-3 class = "colb path" (click)="setClickedRow(ii,'image','PathFromSource')">{{image.PathFromSource}}</ion-col>				 						
+		</ion-row>		
+		</ion-content>				
+  </ion-slide>
+ <!--- for tags --->
+  <ion-slide class="theroot " width="100%" >
+  <ion-header>
+  <ion-toolbar >
+  <ion-row>
+    <ion-col col-1>
+			<button ion-button  icon-only (click)="addeditClicked(1,getselectedRow('tag'),'tag',{true:'add',false:'edit'}[getselectedRow('tag')<0])">
+				<ion-icon [ios]="getselectedRow('tag')<0 ? 'ios-add':'ios-search'" [md]="getselectedRow('tag')<0 ? 'md-add':'md-search'"></ion-icon> 
+			</button>				
+		</ion-col>
+		<ion-col col-10>Tags</ion-col> 
+	   <ion-col col-1>
+				<button ion-button  icon-only (click)="menu()">
+					<ion-icon [ios]="ios-menu" [md]="md-menu"></ion-icon> 
+				</button>				
+		</ion-col>
+	 </ion-row> 
+  </ion-toolbar>
+ <ion-toolbar > 
+    <ion-row>	
+			<ion-col col-4 class="center">Value</ion-col>
+			<ion-col col-8 class="center">Description</ion-col>
+			</ion-row>					
+	</ion-toolbar>
+	</ion-header>
+	<ion-content>
+	  <ion-refresher (ionRefresh)="doRefresh($event);">
+    <ion-refresher-content 
+      refreshingSpinner="circles"
+      refreshingText="refreshing data, please wait">
+    </ion-refresher-content>
+ </ion-refresher> 
+		 <ion-row  *ngFor="let tag of data.Tags;let tt=index"
+												(press)="deleterow(tt,'tag')"
+												 [ngClass]="{true:'selected',false:''}[tt == selectedRow.tag]"
+												 (dblTap)="addeditClicked(2, tt,'tag','edit')">
+			 <ion-col col-4 class = "colb center " (click)="setClickedRow(tt,'tag','Value')">{{tag.value}}</ion-col>
+			 <ion-col col-8 class = "colb" (click)="setClickedRow(tt,'tag','Description')">{{tag.Description}}</ion-col>
+	</ion-row>
+</ion-content>
+</ion-slide>
+</ion-slides>
+</ion-content> 
+<ion-footer>
+  <ion-toolbar >
+
+    <ion-buttons left>
+      <button ion-button  (click)="back()">
+      	<ion-icon md="md-arrow-round-back" ios="ios-arrow-back"></ion-icon>-Back
+      </button>
+    </ion-buttons>
+
+    <ion-buttons right>
+      <button ion-button (click)="next()">Next-
+      		<ion-icon md="md-arrow-round-forward" ios="ios-arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+

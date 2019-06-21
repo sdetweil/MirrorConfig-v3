@@ -1,0 +1,105 @@
+page-tag-modal {
+.box1, .box2, .box3 , .box4{
+   border: 1px solid blue; 
+}
+.header{
+position: sticky;
+top: 0;
+left: 0;
+right: 0;
+z-index: 9999;
+}
+.theroot {
+  background-color: white;
+}
+.colb {  
+	border: 1px solid black; 
+}
+.dashed-border {  
+	border: 1px  black dotted; 
+}
+.path {
+width: 800px;
+overflow: auto
+}
+.selected {
+    background-color:grey;
+    color:white;
+    font-weight:bold;
+}
+.slider {
+padding-bottom: 10px;
+}
+
+.button-add {
+    background-image: url('img/add.png'); /* 16px x 16px */
+    background-color: black;  /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 32px;   
+    width: 32px;         /* make this the size of your image */
+    vertical-align: middle; /* align the text vertically centered */   
+}
+.button-edit {
+    background-image: url('img/edit.png'); /* 16px x 16px */
+    background-color: yellow; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 32px;            /* make this the size of your image */
+	  width: 32px;         /* make this the size of your image */    
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+.main {
+  width: 100%;
+  border: 1px dotted black;
+  display: inline;
+}
+.slide-zoom{
+height:100%;
+overflow-y:scroll
+}
+ul {
+list-style-type: none;
+}
+input {
+  float: left;
+}
+h2 {
+	display:inline;
+	text-align: center;
+	width:100%;
+	float:right;
+}
+.center{
+    vertical-align: middle;
+    text-align: center;   
+}
+        .padding-0 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+.checkbox{
+    vertical-align: middle;
+    text-align: center;
+    padding:3%;
+    float:right;
+}
+.modal-wrapper {
+    position: absolute;
+    width: 90%;
+    height: 50%; 
+    top: 20%;
+    left: 5%;
+  }
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+}

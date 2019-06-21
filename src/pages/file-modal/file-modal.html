@@ -1,0 +1,52 @@
+<!--
+  Generated template for the FileModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-content> -->
+<ion-header padding width="100%">
+
+  <ion-toolbar>
+    <ion-title>{{dialog_title}}</ion-title>
+  </ion-toolbar>
+
+ 	<ion-row>
+ 		<div class="col dashed-border" >{{parentpath}}</div>
+	</ion-row>      
+	<ion-toolbar no-padding>
+		<ion-row >
+			<ion-col col-2  class=" colb  center">Select</ion-col >
+			<ion-col col-2  class=" colb  center">Type</ion-col  >
+			<ion-col col-8  class=" colb ">Name</ion-col>
+		</ion-row>			
+	</ion-toolbar>     	
+</ion-header>
+<ion-content padding  width="100%">
+ <!--- file modal here --->   									
+<ion-row  *ngFor="let file of files; let i = index" (click)="setClickedRow(i,'file','any')" (press)="doubleClick(i,file)" (dblTap)="doubleClick(i,file)"> 
+									 
+	 <ion-col col-2 text-center class="colb " no-padding >				<!--  --> 					
+		 <ion-checkbox  [(ngModel)]="file.selected" (click)="setClickedRow(i,'file','any')"></ion-checkbox>  
+	 	 </ion-col>
+	 <ion-col col-2 class = "colb center" >{{file.filetype}}</ion-col> 									 
+	 <ion-col col-8 class = "colb" 	no-padding>{{file.name}}</ion-col> 
+	 <ion-col col-0 style="display:none" >{{file.id}}</ion-col> 										 													
+</ion-row>										 
+
+</ion-content>
+<!-- </ion-content> -->
+<ion-footer>
+  <ion-row>
+    <ion-col col-2 alignleft> 
+		  <button (click)="closeModal()">Cancel <ion-icon md="md-close" ios="ios-close"></ion-icon></button>
+		</ion-col>
+		<ion-col col-8>
+		</ion-col>
+		<ion-col col-2 >
+			<button (click)="saveModal()" float-right><ion-icon md="md-save" ios="ios-save"></ion-icon>Save </button>
+   	</ion-col>
+ 	</ion-row> 
+</ion-footer>
+
+

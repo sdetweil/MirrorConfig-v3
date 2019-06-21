@@ -1,0 +1,85 @@
+<!--
+  Generated template for the ViewerModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{modaltype}} Viewer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+   		
+				<ion-grid>
+            <ion-row>
+              <ion-col col-2 >              
+                	<label for="vname">Name:</label>                             
+              </ion-col>
+             	<ion-col col-8 class="dashed-border">
+         			 <input [(ngModel)]="thisviewer.Name" type="text" id="vname" align="left"/>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2 >              
+                	<label for="vdescription">Description:</label>                             
+              </ion-col>
+             	<ion-col col-8 class="col dashed-border">
+         			 <input [(ngModel)]="thisviewer.Description" type="text" id="vdescription" align="left"/>
+              </ion-col>
+            </ion-row>            
+            <ion-row>
+              <ion-col col-2 > 
+            		<label for="vtags"> Tags:</label>
+            	</ion-col>
+							<ion-col >
+							  	 
+ 									<ion-select  title="Tags" multiple="true"  id="vtags" [(ngModel)]="thisviewer.Tags" 
+ 											[compareWith]="checkSelectedTag" okText="Okay" cancelText="Dismiss"><ion-label>Tags</ion-label>
+										<ion-option  *ngFor="let tag of data.Tags" value="{{tag._id}}">{{tag.value}}</ion-option>    
+									</ion-select>
+            	</ion-col>
+						</ion-row>
+            <ion-row>
+              <ion-col col-2 > 
+            		<label for="vdays">Days:</label>      
+            	</ion-col>
+							<ion-col col-2 class="dashed-border">
+         				 <input [(ngModel)]="thisviewer.Advance" type="number" id="vdays" class="dashed-border"/>
+            	</ion-col>
+						</ion-row>
+            <ion-row>
+              <ion-col col-2 > 
+            		<label for="vrate"> Rate:</label>
+            	</ion-col >
+							<ion-col class="dashed-border">
+                <input [(ngModel)]="thisviewer.ImageRefreshRate" type="number" id="vrate" class="dashed-border"/>
+            	</ion-col>
+           	</ion-row>
+            <ion-row>
+              <ion-col col-2 > 
+            			<label for="vactive"> Active:</label>
+            	</ion-col>
+							<ion-col col-10>								
+         				 <input [(ngModel)]="thisviewer.Active" type="checkbox" id="vactive" />
+            	</ion-col>
+						</ion-row>
+
+          </ion-grid>
+</ion-content>
+<ion-footer>
+            <ion-row>
+              <ion-col col-2 alignleft> 
+       				  <button (click)="closeModal()">Cancel <ion-icon md="md-close"></ion-icon></button>
+          		</ion-col>
+          		<ion-col col-8>
+          		</ion-col>
+          		<ion-col col-2 >
+          			<button (click)="saveModal()" float-right><ion-icon md="md-save" ></ion-icon>Save </button>
+             	</ion-col>
+           	</ion-row> 
+</ion-footer>

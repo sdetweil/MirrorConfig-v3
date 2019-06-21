@@ -1,0 +1,74 @@
+<!--
+  Generated template for the DataSourceModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{modaltype}} DataSource</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+					<ion-grid>
+            <ion-row>
+              <ion-col col-2 >              
+                	<label for="vname" width="10">Name:</label>                             
+              </ion-col>
+             	<ion-col col-8 class=" dashed-border">
+         			 <input [(ngModel)]="thisdatasource.Name" type="text" id="vname" align="left" class="dashed-border"/>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-2 >              
+                	<label for="vdescription">Description:</label>                             
+              </ion-col>
+             	<ion-col col-8 class=" dashed-border">
+         			 <input [(ngModel)]="thisdatasource.Description" type="text" id="vdescription" align="left" class="dashed-border" />
+              </ion-col>
+            </ion-row>             
+            <ion-row>
+              <ion-col col-2 > 
+            		<label for="vtypes"> Type:</label>
+            	</ion-col>
+							<ion-col  class=" dashed-border">
+								<ion-select  style="max-width:70%;" id="vtypes" [(ngModel)]="thisdatasource.Type.Type" 
+											 okText="Okay" cancelText="Dismiss" [compareWith]="checkSelectedSource">
+									<ion-option  *ngFor="let type of data.DataSourceTypes" >{{type}}</ion-option>    
+								</ion-select >
+            	</ion-col>
+						</ion-row>            
+            <ion-row>
+              <ion-col col-2 > 
+            			<label for="vactive"> Active:</label>
+            	</ion-col>
+							<ion-col col-2 >									
+         				 <input [(ngModel)]="thisdatasource.Active" type="checkbox" id="vactive" ng-checked="thisviewer.Active==true"/> 
+            	</ion-col>
+						</ion-row>            
+            <ion-row (dblTap)="doubleClick(thisdatasource,true)" (press)="doubleClick(thisdatasource,true)">
+              <ion-col col-2 > 
+            		<label for="vroot"> Root:</label>
+            	</ion-col>
+							<ion-col col-10 >              
+                <span id="vroot"  class="dashed-border">{{thisdatasource.Root}}</span>
+            	</ion-col>    
+            	</ion-row>
+        </ion-grid>
+</ion-content>
+<ion-footer>
+            <ion-row>
+              <ion-col col-2> 
+       				  <button (click)="closeModal()">Cancel <ion-icon md="md-close"></ion-icon></button>
+          		</ion-col>
+          		<ion-col col-8>
+          		</ion-col>
+          		<ion-col col-2>
+          			<button (click)="saveModal()" float-right><ion-icon md="md-save"></ion-icon>Save</button>
+             	</ion-col>
+           	</ion-row> 
+</ion-footer>
